@@ -16,10 +16,12 @@ while [[ $# -gt 0 ]]; do
 done
 
 ## TMUX
-if [[ $TMUX_CONF -eq true ]]; then
-    echo "Setting up TMUX"
-    echo "ln -s -T .tmux.conf ~/.tmux.conf"
-    ln -s -T .tmux.conf ~/.tmux.conf
+if $TMUX_CONF; then
+    echo "Setting up tmux"
+    echo "ln -s ~/neovim_remote/.tmux.conf -T ~/.tmux.conf"
+    ln -s ~/neovim_remote/.tmux.conf -T ~/.tmux.conf
+else
+    echo "No tmux setup"
 fi
 
 ## Link NeoVim
@@ -32,17 +34,11 @@ else
 	mkdir ~/.config
 fi
 
-# Check for nvim directory
-if [ -d ~/neovim_remote/nvim ]; then
-	echo "--> Linking nvim config to ~/.config"
-    cp -rsT nvim ~/.config/nvim	
-else
-	echo "--> nvim does not exists!"
-	exit 1
-fi
+echo "--> Linking nvim config to ~/.config"
+cp -rsT ~/neovim_remote/nvim ~/.config/nvim	
 
+## Packer
 echo "--> Cloning packer into .local directory ..."
-
 if [ -d ~/.local/share/nvim/site/pack/packer/start/packer.nvim ]; then
     echo -e "--> Packer already exists! \n"
 else

@@ -22,7 +22,7 @@ out the -t.
 Add the following lines to the alias in your .zshrc or .bashrc (whichever
 shell you prefer).
 ```
-alias nv=~/nvim_remote/nvim.appimage
+alias nv=~/neovim_remote/nvim.appimage
 ```
 
 For compiling large projects, the compiler often likes a clean shell. GNU env
